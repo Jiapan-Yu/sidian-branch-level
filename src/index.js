@@ -67,7 +67,7 @@ AMapLoader.load({
       // 间不能有空格
       content: `<div 
         class="station-name-marker" 
-        style=${/(2|3|7)/.test(i)&&("background-color:yellow;")}>
+        style=${/(2|3|7)/.test(i) && ("background-color:yellow;")}>
       </div>`,
       anchor: 'center',
     })
@@ -131,3 +131,25 @@ AMapLoader.load({
 }).catch(e => {
   console.log(e)
 })
+
+// .video-container
+let videoCounts = 5
+
+for (let i = 0; i < videoCounts; i++) {
+  let videoElm = document.createElement('video')
+  let sourceElm = document.createElement('source')
+  let videoContainerWidth = document.getElementsByClassName('video-container')[0].style.width
+  console.log(videoContainerWidth)
+  console.log('...123')
+  let videoContainerHeight = document.getElementsByClassName('video-container')[0].style.height
+  
+  videoElm.width = "200"
+  videoElm.height = "140"
+  
+  sourceElm.src = "./../movie.mp4"
+  sourceElm.type = "video/mp4"
+  videoElm.append(sourceElm)
+  
+  document.getElementsByClassName('video-container')[0].style.backgroundColor = 'beige'
+  document.getElementsByClassName('video-container')[0].append(videoElm)
+}
