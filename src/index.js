@@ -146,7 +146,7 @@ for (let i = 0; i < videoCounts; i++) {
   videoElm.width = "200"
   videoElm.height = "140"
   
-  sourceElm.src = "./../movie.mp4"
+  sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
   
