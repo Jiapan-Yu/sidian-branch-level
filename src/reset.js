@@ -2,8 +2,12 @@
   function(doc, win) {
     let docEl = doc.documentElement,
       recalc = e => {
-        document.getElementById('main-container').style.height = docEl.clientHeight + 'px'
-        document.getElementById('main-container').style.width = docEl.clientWidth + 'px'
+        document.getElementById('main-container').style.height = docEl.clientHeight + 'px';
+        document.getElementById('main-container').style.width = docEl.clientWidth + 'px';
+
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        docEl.style.fontSize = clientWidth / (1920 / 16) + "px";
       };
 
     win.addEventListener('resize', recalc, false);
