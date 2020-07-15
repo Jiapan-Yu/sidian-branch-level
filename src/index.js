@@ -8,6 +8,8 @@ import {
   parkingLotBase,
 } from './paths.js'
 import AMapLoader from '@amap/amap-jsapi-loader'
+import './static/css/reset.less'
+import './static/css/index.less'
 
 AMapLoader.load({
   "key": "cce9058e8e767e6dc4f66e8309bd4e12",
