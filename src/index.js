@@ -8,6 +8,7 @@ import {
   parkingLotBase,
 } from './paths.js'
 import AMapLoader from '@amap/amap-jsapi-loader'
+import { Chart } from '@antv/g2'
 import './static/css/reset.less'
 import './static/css/index.less'
 
@@ -134,6 +135,7 @@ AMapLoader.load({
   console.log(e)
 })
 
+
 // .video-container
 let videoCounts = 5
 
@@ -144,14 +146,53 @@ for (let i = 0; i < videoCounts; i++) {
   console.log(videoContainerWidth)
   console.log('...123')
   let videoContainerHeight = document.getElementsByClassName('video-container')[0].style.height
-  
+
   videoElm.width = "200"
   videoElm.height = "140"
-  
+
   sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
-  
+
   document.getElementsByClassName('video-container')[0].style.backgroundColor = 'beige'
   document.getElementsByClassName('video-container')[0].append(videoElm)
 }
+
+
+// G2
+const data = [
+  { title: '', actual: 220, target: 250 },
+];
+
+// Step 1: 创建 Chart 对象
+const chart = new Chart({
+  container: 'c1', // 指定图表容器 ID
+  width: 300, // 指定图表宽度
+  height: 200, // 指定图表高度
+});
+chart.legend(false) // 不展示图例
+
+const view = chart.createView({
+  region: {
+    start: {
+      x: 0,
+      y: 0,
+    },
+    end: {
+      x: 1,
+      y: 0.1
+    }
+  },
+  padding: [15, 120, 10]
+})
+view.data(data)
+
+
+// Step 2: 载入数据源
+// chart.data(data);
+
+// Step 3：创建图形语法，绘制柱状图
+// chart.interval().position('genre*sold');
+
+// Step 4: 渲染图表
+chart.render();
