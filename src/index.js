@@ -159,6 +159,75 @@ for (let i = 0; i < videoCounts; i++) {
 }
 
 
+// issue info
+let warningCount = 5
+let warningText = '预警详情预警详情预警详情预警详情预警详情预警详情'
+let issueText = '问题详情问题详情问题详情问题详情问题详情问题详情'
+
+let warningContentDiv = document.createElement('div')
+for (let i = 0; i < warningCount; i++) {
+  let itemDiv = document.createElement('div')
+  itemDiv.style.fontSize = '0.88rem'
+  itemDiv.style.marginBottom = '0.5rem'
+
+  let itemP = document.createElement('div')
+  let itemPStyle = itemP.style
+  itemPStyle.cssText = `
+    color: #00A59A;
+    font-size: 1rem;
+  `
+
+  itemP.textContent = `预警00${i + 1}`
+
+  itemDiv.append(itemP, warningText)
+  warningContentDiv.append(itemDiv)
+}
+
+let issueContentDiv = document.createElement('div')
+for (let i = 0; i < warningCount; i++) {
+  let itemDiv = document.createElement('div')
+  itemDiv.style.fontSize = '0.88rem'
+  itemDiv.style.marginBottom = '0.5rem'
+
+  let itemP = document.createElement('div')
+  let itemPStyle = itemP.style
+  itemPStyle.cssText = `
+    color: #00A59A;
+    font-size: 1rem;
+  `
+
+  itemP.textContent = `问题00${i + 1}`
+
+  itemDiv.append(itemP, issueText)
+  issueContentDiv.append(itemDiv)
+}
+
+document.querySelector('.issue-info .content').append(warningContentDiv)
+document.querySelector('.issue-info .content').append(issueContentDiv)
+
+
+document.querySelector('.important-work').classList.add('selected')
+
+document.querySelector('.important-work').onclick = e => {
+  if (document.querySelector('.important-work').classList.contains('selected')) {
+    return
+  }
+
+  document.querySelector('.important-work').classList.add('selected')
+  document.querySelector('.issue-base').classList.remove('selected')
+}
+
+document.querySelector('.issue-base').onclick = e => {
+  if (document.querySelector('.issue-base').classList.contains('selected')) {
+    return
+  }
+
+  document.querySelector('.issue-base').classList.add('selected')
+  document.querySelector('.important-work').classList.remove('selected')
+}
+
+
+
 // G2
 const data = [
   { title: '', actual: 220, target: 250 },
