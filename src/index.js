@@ -11,6 +11,7 @@ import AMapLoader from '@amap/amap-jsapi-loader'
 import { Chart } from '@antv/g2'
 import './static/css/reset.less'
 import './static/css/index.less'
+const $ = require("jquery");
 
 AMapLoader.load({
   "key": "cce9058e8e767e6dc4f66e8309bd4e12",
@@ -147,14 +148,14 @@ for (let i = 0; i < videoCounts; i++) {
   console.log('...123')
   let videoContainerHeight = document.getElementsByClassName('video-container')[0].style.height
 
-  videoElm.width = "200"
-  videoElm.height = "140"
+  // videoElm.width = "200"
+  // videoElm.height = "140"
 
   sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
 
-  document.getElementsByClassName('video-container')[0].style.backgroundColor = 'beige'
+  // document.getElementsByClassName('video-container')[0].style.backgroundColor = 'beige'
   document.getElementsByClassName('video-container')[0].append(videoElm)
 }
 
@@ -265,3 +266,234 @@ view.data(data)
 
 // Step 4: 渲染图表
 chart.render();
+let fontSize = 16;
+window.onload = function () {
+  fontSize = document.getElementsByTagName("html")[0].style.fontSize
+  fontSize = fontSize.split("px")[0];
+  console.log('fontSize****', fontSize)
+  setProjectChart()
+  setPersonChart()
+}
+
+// 项目进度 条形图
+function setProjectChart() {
+  const data = [
+    { label: '项目进度', type: '项目进度', value: 2800 },
+    { label: '实际进度', type: '实际进度', value: 2260 },
+  ];
+  const chart = new Chart({
+    container: 'projectChart',
+    autoFit: true,
+    height: fontSize * 10,
+    width: fontSize * 23
+  });
+
+  chart.data(data);
+
+  chart
+    .coordinate()
+    .transpose()
+    .scale(1, -1);
+
+  chart.axis('value', {
+    position: 'right',
+  });
+  chart.axis('label', {
+    label: {
+      offset: 12,
+    },
+  });
+
+  chart.tooltip({
+    shared: true,
+    showMarkers: false,
+  });
+
+  chart
+    .interval()
+    .position('label*value')
+    .color('type')
+    .adjust([
+      {
+        type: 'dodge',
+        marginRatio: 0,
+      },
+    ]);
+
+  chart.interaction('active-region');
+  chart.legend({
+    position: 'top-right',
+  });
+
+  chart.render();
+}
+
+// 人员统计 仪表盘
+function setPersonChart() {
+  console.log(111)
+  function creatData() {
+    const data = [];
+    const val = 3;
+    data.push({ value: +val });
+    return data;
+  }
+
+  const color = ['#F5222D', '#0086FA', '#FFBF00'];
+  const chart = new Chart({
+    container: 'personChart',
+    autoFit: true,
+    height: fontSize * 8,
+    padding: [0, 0, 30, 0],
+  });
+  chart.data(creatData());
+  chart.animate(false);
+
+  chart.coordinate('polar', {
+    startAngle: (-9 / 8) * Math.PI,
+    endAngle: (1 / 8) * Math.PI,
+    radius: 0.75,
+  });
+  chart.scale('value', {
+    min: 0,
+    max: 6,
+    tickInterval: 1,
+  });
+
+  chart.axis('1', false);
+  chart.axis('value', {
+    line: null,
+    label: {
+      offset: -40,
+      style: {
+        fontSize: 18,
+        fill: '#CBCBCB',
+        textAlign: 'center',
+        textBaseline: 'middle',
+      },
+    },
+    tickLine: {
+      length: -24,
+    },
+    grid: null,
+  });
+  chart.legend(false);
+  chart.tooltip(false);
+  chart
+    .point()
+    .position('value*1')
+    .shape('pointer')
+    .color('value', (val) => {
+      if (val < 2) {
+        return color[0];
+      } else if (val <= 4) {
+        return color[1];
+      } else if (val <= 6) {
+        return color[2];
+      }
+    });
+
+  draw(creatData());
+  //setInterval(function() {
+  //draw(creatData());
+  //}, 1000);
+
+  function draw(data) {
+    const val = data[0].value;
+    const lineWidth = 25;
+    chart.annotation().clear(true);
+    // 绘制仪表盘背景
+    chart.annotation().arc({
+      top: false,
+      start: [0, 1],
+      end: [6, 1],
+      style: {
+        stroke: '#CBCBCB',
+        lineWidth,
+        lineDash: null,
+      },
+    });
+
+    if (val >= 2) {
+      chart.annotation().arc({
+        start: [0, 1],
+        end: [val, 1],
+        style: {
+          stroke: color[0],
+          lineWidth,
+          lineDash: null,
+        },
+      });
+    }
+
+    if (val >= 4) {
+      chart.annotation().arc({
+        start: [2, 1],
+        end: [4, 1],
+        style: {
+          stroke: color[1],
+          lineWidth,
+          lineDash: null,
+        },
+      });
+    }
+
+    if (val > 4 && val <= 6) {
+      chart.annotation().arc({
+        start: [4, 1],
+        end: [val, 1],
+        style: {
+          stroke: color[2],
+          lineWidth,
+          lineDash: null,
+        },
+      });
+    }
+
+    if (val > 2 && val <= 4) {
+      chart.annotation().arc({
+        start: [2, 1],
+        end: [val, 1],
+        style: {
+          stroke: color[1],
+          lineWidth,
+          lineDash: null,
+        },
+      });
+    }
+
+    if (val < 2) {
+      chart.annotation().arc({
+        start: [0, 1],
+        end: [val, 1],
+        style: {
+          stroke: color[0],
+          lineWidth,
+          lineDash: null,
+        },
+      });
+    }
+
+    // 绘制指标数字
+    chart.annotation().text({
+      position: ['50%', '85%'],
+      content: '打卡人数/应到人数',
+      style: {
+        fontSize: 20,
+        fill: '#545454',
+        textAlign: 'center',
+      },
+    });
+    chart.annotation().text({
+      position: ['50%', '90%'],
+      content: `${data[0].value * 10} %`,
+      style: {
+        fontSize: 36,
+        fill: '#545454',
+        textAlign: 'center',
+      },
+      offsetY: 15,
+    });
+    chart.changeData(data);
+  }
+
+}

@@ -21,6 +21,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@antv/g2": "^4.0.12"
+    "@antv/g2": "^4.0.12",
+    "jquery": "^3.5.1"
   }
 }

@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>四电项目</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>四电项目</title>
-</head>
-
-<body>
-  <div class="main-container" id="main-container">
-    <div class="info-container">
-      <div class="project-info">
-        <span onclick="window.location.href='./tests/antv.html'">项目概况</span>
-      </div>
-      <div class="attending-info">
-        <div id="c1"></div>
-      </div>
-      <div class="issue-info">
-        <div class="title">
-          <div class="important-work">重点工作(12/13)</div>
-          <div class="issue-base">问题库(11/13)</div>
+  <body>
+    <div class="main-container" id="main-container">
+      <div class="info-container">
+        <div class="project-info">
+          <head onclick="window.location.href='./tests/antv.html'">项目进度</head
+          >
+          <div id="projectChart"></div>
         </div>
-        <div class="content"></div>
+        <div class="person-info">
+          <head>人员统计</head>
+          <div id="personChart"></div>
+          <div id="c1"></div>
+        </div>
+        <div class="issue-info">
+          <div class="title">
+            <div class="important-work">重点工作(12/13)</div>
+            <div class="issue-base">问题库(11/13)</div>
+          </div>
+          <div class="content"></div>
+        </div>
+      </div>
+      <div class="map-container">
+        <div class="mapBox">
+          <div class="mapNav">
+            <div>GIS</div>
+            <div>BIM</div>
+          </div>
+          <div id="container"></div>
+        </div>
+        <div class="video-container"></div>
       </div>
     </div>
-    <div class="map-container">
-      <div id="container"></div>
-      <div class="video-container"></div>
-    </div>
-  </div>
-  <script src="src/reset.js"></script>
-  <script src="dist/main.js"></script>
-</body>
-
+    <script src="src/reset.js"></script>
+    <script src="dist/main.js"></script>
+  </body>
 </html>
