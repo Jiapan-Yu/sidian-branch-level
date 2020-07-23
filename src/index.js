@@ -154,8 +154,7 @@ for (let i = 0; i < videoCounts; i++) {
   sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
-
-  // document.getElementsByClassName('video-container')[0].style.backgroundColor = 'beige'
+  
   document.getElementsByClassName('video-container')[0].append(videoElm)
 }
 
