@@ -10,14 +10,27 @@
     <div class="main-container" id="main-container">
       <div class="info-container">
         <div class="project-info">
-          <head onclick="window.location.href='./tests/antv.html'">项目进度</head
-          >
-          <div id="projectChart"></div>
+          <head onclick="window.location.href='./tests/antv.html'">
+            项目进度
+          </head>
+          <!-- <div id="projectChart"></div> -->
+          <div class="project-progress"><div class="progress"></div></div>
+          <div class="progress-text"><text>20% </text>计划进度/实际进度</div>
         </div>
         <div class="person-info">
-          <head>人员统计</head>
+          <head>
+            人员统计
+          </head>
           <div id="personChart"></div>
-          <div id="c1"></div>
+          <!-- <div id="c1"></div> -->
+          <div class="person-table">
+            <table>
+              <thead>
+                <tr><td>部门出勤率</td><td>出勤人数</td><td>平均工时</td></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
         <div class="issue-info">
           <div class="title">

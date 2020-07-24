@@ -154,7 +154,7 @@ for (let i = 0; i < videoCounts; i++) {
   sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
-  
+
   document.getElementsByClassName('video-container')[0].append(videoElm)
 }
 
@@ -229,49 +229,51 @@ document.querySelector('.issue-base').onclick = e => {
 
 
 // G2
-const data = [
-  { title: '', actual: 220, target: 250 },
-];
+// const data = [
+//   { title: '', actual: 220, target: 250 },
+// ];
 
-// Step 1: 创建 Chart 对象
-const chart = new Chart({
-  container: 'c1', // 指定图表容器 ID
-  width: 300, // 指定图表宽度
-  height: 200, // 指定图表高度
-});
-chart.legend(false) // 不展示图例
+// // Step 1: 创建 Chart 对象
+// const chart = new Chart({
+//   container: 'c1', // 指定图表容器 ID
+//   width: 300, // 指定图表宽度
+//   height: 200, // 指定图表高度
+// });
+// chart.legend(false) // 不展示图例
 
-const view = chart.createView({
-  region: {
-    start: {
-      x: 0,
-      y: 0,
-    },
-    end: {
-      x: 1,
-      y: 0.1
-    }
-  },
-  padding: [15, 120, 10]
-})
-view.data(data)
+// const view = chart.createView({
+//   region: {
+//     start: {
+//       x: 0,
+//       y: 0,
+//     },
+//     end: {
+//       x: 1,
+//       y: 0.1
+//     }
+//   },
+//   padding: [15, 120, 10]
+// })
+// view.data(data)
 
 
-// Step 2: 载入数据源
-// chart.data(data);
+// // Step 2: 载入数据源
+// // chart.data(data);
 
-// Step 3：创建图形语法，绘制柱状图
-// chart.interval().position('genre*sold');
+// // Step 3：创建图形语法，绘制柱状图
+// // chart.interval().position('genre*sold');
 
-// Step 4: 渲染图表
-chart.render();
+// // Step 4: 渲染图表
+// chart.render();
 let fontSize = 16;
 window.onload = function () {
   fontSize = document.getElementsByTagName("html")[0].style.fontSize
   fontSize = fontSize.split("px")[0];
   console.log('fontSize****', fontSize)
-  setProjectChart()
+  // setProjectChart()
+  setProject()
   setPersonChart()
+  setPersonTable()
 }
 
 // 项目进度 条形图
@@ -327,9 +329,18 @@ function setProjectChart() {
   chart.render();
 }
 
+//设置项目进度数据
+function setProject() {
+  const data = {
+    plan: 86,
+    actual: 23
+  }
+  $(".progress").css({ width: (data.actual / data.plan * 100) + "%" })
+  $(".progress-text text").text((data.actual / data.plan * 100).toFixed(2) + "%")
+}
+
 // 人员统计 仪表盘
 function setPersonChart() {
-  console.log(111)
   function creatData() {
     const data = [];
     const val = 3;
@@ -342,15 +353,15 @@ function setPersonChart() {
     container: 'personChart',
     autoFit: true,
     height: fontSize * 8,
-    padding: [0, 0, 30, 0],
+    padding: [0, 0, 0, 0],
   });
   chart.data(creatData());
   chart.animate(false);
 
   chart.coordinate('polar', {
-    startAngle: (-9 / 8) * Math.PI,
-    endAngle: (1 / 8) * Math.PI,
-    radius: 0.75,
+    startAngle: -Math.PI,
+    endAngle: 0,
+    radius: 0.85,
   });
   chart.scale('value', {
     min: 0,
@@ -359,22 +370,7 @@ function setPersonChart() {
   });
 
   chart.axis('1', false);
-  chart.axis('value', {
-    line: null,
-    label: {
-      offset: -40,
-      style: {
-        fontSize: 18,
-        fill: '#CBCBCB',
-        textAlign: 'center',
-        textBaseline: 'middle',
-      },
-    },
-    tickLine: {
-      length: -24,
-    },
-    grid: null,
-  });
+  chart.axis('value', false);
   chart.legend(false);
   chart.tooltip(false);
   chart
@@ -392,9 +388,6 @@ function setPersonChart() {
     });
 
   draw(creatData());
-  //setInterval(function() {
-  //draw(creatData());
-  //}, 1000);
 
   function draw(data) {
     const val = data[0].value;
@@ -474,19 +467,19 @@ function setPersonChart() {
 
     // 绘制指标数字
     chart.annotation().text({
-      position: ['50%', '85%'],
+      position: ['50%', '90%'],
       content: '打卡人数/应到人数',
       style: {
-        fontSize: 20,
+        fontSize: fontSize,
         fill: '#545454',
         textAlign: 'center',
       },
     });
     chart.annotation().text({
-      position: ['50%', '90%'],
+      position: ['50%', '55%'],
       content: `${data[0].value * 10} %`,
       style: {
-        fontSize: 36,
+        fontSize: 2 * fontSize,
         fill: '#545454',
         textAlign: 'center',
       },
@@ -495,4 +488,17 @@ function setPersonChart() {
     chart.changeData(data);
   }
 
+}
+
+function setPersonTable(){
+  const data = [
+    {name:"班组2",plan: 86,actual: 23,workingHours:'3小时'},
+    {name:"班组3",plan: 86,actual: 23,workingHours:'3小时'},
+    {name:"班组4",plan: 86,actual: 23,workingHours:'3小时'},
+  ]
+  var tr = ''
+  for(var i in data){
+    tr+=`<tr><td><text>${i+1}</text><span>${data[i].name}</span></td><td>${data[i].actual}/${data[i].plan}</td><td>${data[i].workingHours}</td></tr>`
+  }
+  $(".person-table tbody").append(tr)
 }
