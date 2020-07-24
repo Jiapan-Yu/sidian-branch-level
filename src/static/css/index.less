@@ -2,7 +2,6 @@ body {
   width: 100% !important;
   padding: 0;
   margin: 0;
-  overflow-y: hidden; // hide vertical scrollbar
 
   .main-container {
     width: 100% !important;
@@ -133,6 +132,45 @@ body {
 
           .project-base-star {
             background-color: red;
+          }
+        }
+      }
+
+      #carousel {
+        .arrow {
+          padding: 0;
+          background: #ddd;
+          border-radius: 15px;
+          border: 1px solid gray;
+          font-size: 24px;
+          line-height: 24px;
+          color: #444;
+          display: block;
+          &:focus {
+            outline: none;
+          }
+          &:hover {
+            background: #ccc;
+            cursor: pointer;
+          }
+        }
+        #videos {
+          overflow-x: hidden;
+          ul {
+            width: 9999rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+            li {
+              display: inline-block;
+              margin-right: 1rem;
+              position: relative;
+              video {
+                width: 16rem;
+                display: block;
+              }
+            }
           }
         }
       }

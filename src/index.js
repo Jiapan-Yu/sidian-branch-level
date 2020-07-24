@@ -137,25 +137,22 @@ AMapLoader.load({
 })
 
 
-// .video-container
+// #carousel
 let videoCounts = 5
 
 for (let i = 0; i < videoCounts; i++) {
   let videoElm = document.createElement('video')
   let sourceElm = document.createElement('source')
-  let videoContainerWidth = document.getElementsByClassName('video-container')[0].style.width
-  console.log(videoContainerWidth)
-  console.log('...123')
-  let videoContainerHeight = document.getElementsByClassName('video-container')[0].style.height
-
-  // videoElm.width = "200"
-  // videoElm.height = "140"
 
   sourceElm.src = "../src/static/images/movie.mp4"
   sourceElm.type = "video/mp4"
   videoElm.append(sourceElm)
 
-  document.getElementsByClassName('video-container')[0].append(videoElm)
+  let liElm = document.createElement('li')
+  liElm.append(videoElm)
+
+  liElm.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i + 1}</span>`)
+  videos.querySelector('ul').append(liElm)
 }
 
 
