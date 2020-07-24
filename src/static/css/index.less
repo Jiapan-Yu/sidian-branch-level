@@ -27,6 +27,15 @@ body {
         padding: 1rem;
         box-sizing: border-box;
         margin-bottom: 1rem;
+        &.important-work {
+          div {
+            span:nth-child(2) {
+              display: inline-block;
+              height: 0.7rem;
+              background-color: lightskyblue;
+            }
+          }
+        }
       }
       head {
         font-size: 1rem;
@@ -70,32 +79,6 @@ body {
           }
           thead{
             color: rgba(0, 0, 0, 0.45);
-          }
-        }
-      }
-      .issue-info {
-        height: 32%;
-        .title {
-          display: flex;
-          justify-content: space-around;
-          > div {
-            font-size: 1rem;
-            color: rgba(24, 25, 31, 0.85);
-            opacity: 0.4;
-            height: 2.1rem;
-            line-height: 2.1rem;
-            &:hover {
-              cursor: pointer;
-            }
-            &.selected {
-              color: #00a59a;
-              opacity: 1;
-            }
-          }
-        }
-        .content {
-          > div {
-            display: inline-block;
           }
         }
       }
