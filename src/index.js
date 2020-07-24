@@ -202,9 +202,6 @@ for (let i = 0; i < warningCount; i++) {
   issueContentDiv.append(itemDiv)
 }
 
-document.querySelector('.issue-info .content').append(warningContentDiv)
-document.querySelector('.issue-info .content').append(issueContentDiv)
-
 
 document.querySelector('.important-work').classList.add('selected')
 
